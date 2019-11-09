@@ -40,7 +40,6 @@ var arraySum = function (array) {
   }, 0);
 
 };
-console.log(arraySum([1, [2, 3], [[4]], 5]));
 
 // 4. Check if a number is even.
 
@@ -76,7 +75,6 @@ var sumBelow = function (n) {
   }
   return sum;
 };
-console.log(sumBelow(10));
 
 // 6. Get the integers within a range (x, y).
 
@@ -100,7 +98,6 @@ var range = function (x, y) {
   }
   return array;
 };
-console.log(range(2, 9));
 
 // 7. Compute the exponent of a number.
 
@@ -122,7 +119,6 @@ var exponent = function (base, exp) {
 // return exp > 0 ? base * exponent(base, exp - 1) : 1 / (base * exponent(base, -1 * exp - 1));
 //   //228 ms
 // }
-console.log(exponent(4, 3));
 
 
 // 8. Determine if a number is a power of two.
@@ -134,7 +130,6 @@ var powerOfTwo = function (n) {
   //n = 2 * 2 * 2...
   return powerOfTwo(n / 2);
 };
-console.log(powerOfTwo(64));
 
 // 9. Write a function that reverses a string.
 
@@ -165,7 +160,6 @@ var palindrome = function (string) {
   // string = string.toLowerCase();
   // return Array.from(string).toString() === Array.from(string).reverse().toString()
 };
-console.log(palindrome('mom'));
 // 11. Write a function that returns the remainder of x divided by y without using the
 // modulo (%) operator.
 // modulo(5,2) // 1
