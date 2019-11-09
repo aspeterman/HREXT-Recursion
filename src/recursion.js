@@ -161,7 +161,7 @@ var palindrome = function (string) {
   // return Array.from(string).toString() === Array.from(string).reverse().toString()
 };
 // 11. Write a function that returns the remainder of x divided by y without using the
-// modulo (%) operator.
+// modulo (%) operator
 // modulo(5,2) // 1
 // modulo(17,5) // 2
 // modulo(22,6) // 4
