@@ -6,7 +6,6 @@
 // denoted by n!, is the product of all positive integers less than or equal to n.
 
 var factorial = function (n) {
-  //set fact to 1 for the first iteration to work
   var fact = 1;
   if (n < 0) { return null; }
   if (n === 0) { return fact; }
@@ -15,13 +14,12 @@ var factorial = function (n) {
   }
   return fact;
 };
-
+console.log(factorial(5))
 // 2. Compute the sum of an array of integers.
 
 var sum = function (array) {
   if (array.length === 0) { return 0; }
   if (array.length === 1) { return array[0]; }
-  //sum last value of the array with the previous sum value
 
   return array[0] + sum(array.slice(1));
 };
@@ -30,9 +28,7 @@ var sum = function (array) {
 // 3. Sum all numbers in an array containing nested arrays.
 
 var arraySum = function (array) {
-  //return item if it is nested
-  //   if(array.length === 1){return array[0];}
-  //   sum last value of the array with the previous sum value
+
 
   return array.reduce((result, ix) => {
 
@@ -45,13 +41,9 @@ var arraySum = function (array) {
 
 var isEven = function (n) {
 
-  //turn negative numbers positive
   if (n < 0) { n = Math.abs(n); }
-  //case 0 is true
-  //case 1 is false
   if (n === 0) { return true; }
   if (n === 1) { return false; }
-  //subtract 2 from number until it hits 0 or 1
   else {
     n = n - 2;
     return isEven(n);
@@ -104,21 +96,14 @@ var range = function (x, y) {
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
 
 var exponent = function (base, exp) {
-  //prevent callstack with limit 0
   if (exp === 0) { return 1; }
   if (exp < 0) {
-    return 1 / (base * exponent(base, (-1 * exp) - 1));
+    return (1 / (base * exponent(base, (-1 * exp) - 1)));
   }
   else {
-    return base * exponent(base, exp - 1);
+    return (base * exponent(base, exp - 1));
   }
-}; //298 ms
-// var exponent = function(base, exp) {
-// //alternate compressed method
-// if (exp === 0){ return 1; }
-// return exp > 0 ? base * exponent(base, exp - 1) : 1 / (base * exponent(base, -1 * exp - 1));
-//   //228 ms
-// }
+};
 
 
 // 8. Determine if a number is a power of two.
@@ -134,7 +119,6 @@ var powerOfTwo = function (n) {
 // 9. Write a function that reverses a string.
 
 var reverse = function (string) {
-  //compressed method
   return string ? reverse(string.substr(1)) + string[0] : string;
 
 };
@@ -149,16 +133,10 @@ var palindrome = function (string) {
   }
 
   string = string.toLowerCase();
-  //use recursion/slice to compare first and last chars in progression
   if (string[0] === string[len - 1]) {
-    //run palindrome on newly created string
     return palindrome(string.slice(1, len - 1));
   }
   return false;
-
-  // non-recursive method
-  // string = string.toLowerCase();
-  // return Array.from(string).toString() === Array.from(string).reverse().toString()
 };
 // 11. Write a function that returns the remainder of x divided by y without using the
 // modulo (%) operator
@@ -166,27 +144,27 @@ var palindrome = function (string) {
 // modulo(17,5) // 2
 // modulo(22,6) // 4
 var modulo = function (x, y) {
-  //if y is larger than x, find the largest multiple of x before it is larger than y
-  //divide x by y -> dec * y
-  var multiple = Math.abs(x / y);
-  var remain = 1;
-  if (x < y) {
-    return (modulo(multiple, remain + 1));
-  }
-  if (x === multiple + remain) {
-    return remain;
-  }
-  return remain;
+
 };
 
 // 12. Write a function that multiplies two numbers without using the * operator or
 // Math methods.
 var multiply = function (x, y) {
+  if(y === 0){return 0;}
+  if(y > 0){
+    return (x + multiply(x, y - 1));
+  }
+  if(y < 0){
+    return -(x + multiply(x, -y - 1));
+  }
 };
+console.log(multiply(3,4));
+console.log(multiply(3, -4));
 
 // 13. Write a function that divides two numbers without using the / operator or
 // Math methods to arrive at an approximate quotient (ignore decimal endings).
 var divide = function (x, y) {
+
 };
 
 // 14. Find the greatest common divisor (gcd) of two positive numbers. The GCD of two
@@ -195,24 +173,43 @@ var divide = function (x, y) {
 // http://www.cse.wustl.edu/~kjg/cse131/Notes/Recursion/recursion.html
 // https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/the-euclidean-algorithm
 var gcd = function (x, y) {
-};
 
+};
 // 15. Write a function that compares each character of two strings and returns true if
 // both are identical.
 // compareStr('house', 'houses') // false
 // compareStr('tomato', 'tomato') // true
 var compareStr = function (str1, str2) {
-};
-
+  if (str1[0] === str2[0] && str1.length>0) {
+    return compareStr(str1.slice(1), str2.slice(1));
+  } else if (str1[0] !== str2[0]){
+    return false;
+  } else{
+    return true;
+  }
+}
+console.log(compareStr('hellos', 'hello'));
 // 16. Write a function that accepts a string and creates an array where each letter
 // occupies an index of the array.
 var createArray = function (str) {
+  if (str.length <= 1) {
+    return [str[0]]; //
+  } else {
+    return [str[0]].concat(createArray(str.slice(1)));
+  }
 };
+console.log(createArray('hello'));
+console.log(createArray('world'));
 
 // 17. Reverse the order of an array
 var reverseArr = function (array) {
+  if (array.length === 0) {
+    return [];
+  } else {
+    return [array[array.length - 1]].concat(reverseArr(array.slice(0, array.length - 1)));
+  }
 };
-
+console.log(reverseArr('foo'));
 // 18. Create a new array with a given value and length.
 // buildList(0,5) // [0,0,0,0,0]
 // buildList(7,3) // [7,7,7]
