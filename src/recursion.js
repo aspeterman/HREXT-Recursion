@@ -454,3 +454,22 @@ var mergeSort = function(array) {
 // obj1 === obj2 // false
 var clone = function(input) {
 };
+
+
+//do not remove, this code is necessary for the auto-grader to run without error
+if (typeof window !== 'object') {
+  var mergeObj = {
+    factorial: factorial,
+    sum: sum,
+    arraySum: arraySum,
+    isEven: isEven,
+    sumBelow: sumBelow,
+    range: range,
+    powerOfTwo: powerOfTwo,
+    palindrome: palindrome,
+    reverse: reverse,
+    exponent: exponent
+  }
+
+  Object.assign(global, mergeObj);
+}
