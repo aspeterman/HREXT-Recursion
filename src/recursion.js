@@ -1,4 +1,3 @@
-/* jshint esversion: 6 */
 
 // Solve the following prompts using recursion.
 
@@ -143,8 +142,23 @@ var palindrome = function(string) {
 // modulo(17,5) // 2
 // modulo(22,6) // 4
 var modulo = function(x, y) {
+  if (x === 0 || y === 0) {
+     return 0;
+   } else if (y === 1) {
+     return x;
+   } else if (x < y) {
+     return x;
+   }
 
+   return modulo( x-Math.floor(x/y)*y, y );
 };
+console.log('----- Modulo ----------');
+console.log( 'modulo(17,5)');
+console.log(modulo(17, 5));
+console.log( 'modulo(5,1)');
+console.log(modulo(5,1));
+console.log( 'modulo(5,0)');
+console.log(modulo(5,0));
 
 // 12. Write a function that multiplies two numbers without using the * operator or
 // Math methods.
@@ -158,7 +172,8 @@ var multiply = function(x, y) {
   }
 };
 
-
+console.log('----------- Multiple ---------');
+console.log(multiply(3,5));
 // 13. Write a function that divides two numbers without using the / operator or
 // Math methods to arrive at an approximate quotient (ignore decimal endings).
 var divide = function(x, y) {
@@ -171,8 +186,17 @@ var divide = function(x, y) {
 // http://www.cse.wustl.edu/~kjg/cse131/Notes/Recursion/recursion.html
 // https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/the-euclidean-algorithm
 var gcd = function(x, y) {
-
+  if(x%y > 0){
+    var ix = x%y;
+    return gcd(y, ix);
+  }
+  else if(x%y === 0){
+    return y;
+  }
 };
+console.log('-----------gcd----------');
+console.log(gcd(4, 36));
+
 // 15. Write a function that compares each character of two strings and returns true if
 // both are identical.
 // compareStr('house', 'houses') // false
@@ -185,7 +209,8 @@ var compareStr = function(str1, str2) {
   } else{
     return true;
   }
-}
+};
+
 // 16. Write a function that accepts a string and creates an array where each letter
 // occupies an index of the array.
 var createArray = function(str) {
@@ -209,15 +234,35 @@ var reverseArr = function(array) {
 // buildList(0,5) // [0,0,0,0,0]
 // buildList(7,3) // [7,7,7]
 var buildList = function(value, length) {
+  var arr = [];
+  if(length === 0){return arr}
+  if(length > 0){
+  arr.push(value);
+  return [value].concat(buildList(value, length - 1));
+  }
 };
-
+console.log('--------buildList----------')
+console.log(buildList(0, 5))
 // 19. Implement FizzBuzz. Given integer n, return an array of the string representations of 1 to n.
 // For multiples of three, output 'Fizz' instead of the number.
 // For multiples of five, output 'Buzz' instead of the number.
 // For numbers which are multiples of both three and five, output “FizzBuzz” instead of the number.
 // fizzBuzz(5) // ['1','2','Fizz','4','Buzz']
 var fizzBuzz = function(n) {
+  if (n === 0) {
+    return [];
+  }
+  if (n % 3 === 0 && n % 5 === 0) {
+    return fizzBuzz(n - 1).concat('FizzBuzz');
+  } else if (n % 3 === 0) {
+    return fizzBuzz(n - 1).concat('Fizz');
+  } else if (n % 5 === 0) {
+    return fizzBuzz(n - 1).concat('Buzz');
+  }
+  return fizzBuzz(n - 1).concat(n);
 };
+console.log('----------fizzBuzz-----------')
+console.log(fizzBuzz(15));
 
 // 20. Count the occurence of a value in a list.
 // countOccurrence([2,7,4,4,1,4], 4) // 3
@@ -305,7 +350,19 @@ var flatten = function(array) {
 // 31. Given a string, return an object containing tallies of each letter.
 // letterTally('potato'); // {p:1, o:2, t:2, a:1}
 var letterTally = function(str, obj) {
+  if (str.length===0) {
+     return str, obj;
+  }
+  if (!obj[str[0]]) {
+    obj[str[0]] = 1;
+  }
+  else {
+    obj[str[0]] += 1;
+  }
+  return letterTally( str.slice(1), obj );
 };
+console.log('---------letterTally-----------')
+console.log(letterTally('potato', {}));
 
 // 32. Eliminate consecutive duplicates in a list. If the list contains repeated
 // elements they should be replaced with a single copy of the element. The order of the
@@ -352,7 +409,37 @@ var tagCount = function(tag, node) {
 // binarySearch(array, 5) // 5
 // https://www.khanacademy.org/computing/computer-science/algorithms/binary-search/a/binary-search
 var binarySearch = function(array, target, min, max) {
+  if (min === undefined) {
+    min = 0;
+  }
+
+  var index = Math.floor(array.length/2);
+  if(array.length < 3){
+    if(array[0] === target){
+    return index + min;
+  }
+
+  else if (array[1] === target) {
+    return index + min + 1;
+  }
+  else {
+    return console.log('-1');
+  }
+}
+  if(target === array[index]){
+    return index + min;
+  }
+
+  if(target < array[index]){
+    return binarySearch(array.slice(0, index), target, min);
+  }
+  else {
+    return binarySearch(array.slice(index), target, index+min);
+  }
 };
+var primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89];
+console.log('-----------binarySearch-----------')
+console.log(binarySearch(primes, 17));
 
 // 39. Write a merge sort function.
 // mergeSort([34,7,23,32,5,62]) // [5,7,23,32,34,62]
